@@ -15,6 +15,8 @@ namespace Todoapp
 
             DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
+            //MainPage = new RegisterPage();
+            //MainPage = new LoginPage();
         }
 
         protected override void OnStart()
