@@ -7,29 +7,28 @@
              x:Class="Todoapp.Views.RegisterPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
-
-
-
-        <AbsoluteLayout>
+        <StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="20">
             <Label Text="New User Registeration" FontSize="30" FontAttributes="None" FontFamily="Lobster-Regular" 
-                   TextColor="Blue" AbsoluteLayout.LayoutBounds="45,150,0.90,0.10"  AbsoluteLayout.LayoutFlags="SizeProportional"/>
-            <Label Text="Welcome to Study Buddy" FontSize="20" FontAttributes="Italic" FontFamily="Lobster-Regular" 
-                   TextColor="Blue" AbsoluteLayout.LayoutBounds="90,200,0.90,0.10"  AbsoluteLayout.LayoutFlags="SizeProportional"/>
-
-
-
-            <Entry Keyboard="Text" AbsoluteLayout.LayoutBounds="52,300,0.75,0.070"  AbsoluteLayout.LayoutFlags="SizeProportional"
+                   TextColor="Blue" />
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Label Text="Welcome to Study Buddy" FontSize="20" FontAttributes="Italic" FontFamily="Lobster-Regular" 
+                   TextColor="Blue" />
+            </StackLayout>
+        </StackLayout>
+            <StackLayout Padding="50">
+                <Entry Keyboard="Text"  x:Name="EntryUserName"
                     Placeholder="Username:" PlaceholderColor="Black"  />
-            <Entry Keyboard="Email" AbsoluteLayout.LayoutBounds="52,350,0.75,0.070"  AbsoluteLayout.LayoutFlags="SizeProportional"
+                <Entry Keyboard="Email" x:Name="EntryEmail"
                     Placeholder="Email:" PlaceholderColor="Black"  />
-            <Entry IsPassword="True" AbsoluteLayout.LayoutBounds="52,400,0.75,0.070"  AbsoluteLayout.LayoutFlags="SizeProportional"
+                <Entry IsPassword="True" x:Name="EntryPassword"
                     Placeholder="Password:" PlaceholderColor="Black"/>
-
-
-            <Button BackgroundColor="Blue" BorderRadius="12"  AbsoluteLayout.LayoutBounds="52,480,0.75,0.060"  AbsoluteLayout.LayoutFlags="SizeProportional"
-                    Text="Register" />
-            
-        </AbsoluteLayout>
+                <StackLayout Padding="20">
+                    <Button BackgroundColor="Blue" BorderRadius="12"  
+                    Text="Register" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 
 </ContentPage>

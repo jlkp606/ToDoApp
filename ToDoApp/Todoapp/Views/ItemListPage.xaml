@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todoapp.Views.ItemListPage"
+             xmlns:todoapp="clr-namespace:Todoapp.Views"
+             Title="{Binding Title}"
+             xmlns:local="clr-namespace:Todoapp.ViewModels"  
+             xmlns:model="clr-namespace:Todoapp.Models">
+    <ContentPage Title="Current">
+        <ContentPage.Content>
+            <StackLayout>
+                <RefreshView x:DataType="local:ItemListViewModel" Command="{Binding LoadItemsCurrentCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                    <CollectionView x:Name="ItemsListView" ItemsSource="{Binding Items}" SelectionMode="None">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10" Orientation="Horizontal" Spacing="10" x:DataType="model:Item">
+                                    <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="10" >
+                                        <Label Text="{Binding TaskName}"
+                                                               LineBreakMode="NoWrap" 
+                                                               Style="{DynamicResource ListItemTextStyle}" 
+                                                               FontSize="Medium"
+                                                               FontAttributes="None"></Label>
+                                        <Label Text="{Binding UnitName}"
+                                               LineBreakMode="NoWrap" 
+                                               Style="{DynamicResource ListItemDetailTextStyle}" 
+                                               TextColor="Gray"
+                                               FontSize="Small"  ></Label>
+
+                                        <Label Text="{Binding Description}" 
+                                                       FontSize="Micro"
+                                                       LineBreakMode="NoWrap" 
+                                                       Style="{DynamicResource ListItemDetailTextStyle}" ></Label>
+                                        <Label Text="{Binding Status}" 
+                                                       FontSize="Micro"
+                                                       LineBreakMode="NoWrap" 
+                                                       Style="{DynamicResource ListItemDetailTextStyle}" ></Label>
+                                        <Label Text="{Binding DueDate}" 
+                                                       FontSize="Micro"
+                                                       LineBreakMode="NoWrap" 
+                                                       Style="{DynamicResource ListItemDetailTextStyle}" ></Label>
+                                    </StackLayout>
+                                    <StackLayout HorizontalOptions="End">
+                                        <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= MoveToDoneCommand}"
+                                                CommandParameter="{Binding .}"></Button>
+                                    </StackLayout>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+
+                <StackLayout>
+                    <Button Text="+"  HorizontalOptions="Fill" FontSize="Large" StyleClass="secondary-btn"  Command="{Binding AddItemCommand}" ></Button>
+            </StackLayout>
+                <!--<StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
+                    <Button Text="Home" WidthRequest="200" Clicked="Button_Clicked"></Button>
+                    <Button Text="Tasks" WidthRequest="200"></Button>
+                </StackLayout>-->
+        </StackLayout>
+            </ContentPage.Content>
+    </ContentPage>
+    <todoapp:DueItemListPage Title="Due"></todoapp:DueItemListPage>
+    <todoapp:InProgressItemListPage Title="In Progress"></todoapp:InProgressItemListPage>
+    <todoapp:BacklogItemListPage Title="Backlog"></todoapp:BacklogItemListPage>
+    <todoapp:CompletedItemListPage Title="Done"></todoapp:CompletedItemListPage>
+</TabbedPage>

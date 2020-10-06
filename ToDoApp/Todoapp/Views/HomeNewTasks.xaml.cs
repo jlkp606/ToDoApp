@@ -1,27 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Todoapp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-
 namespace Todoapp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomeListViewPage : TabbedPage
+    public partial class HomeNewTasks : ContentPage
     {
-        public HomeListViewPage()
+        public HomeNewTasks()
         {
             InitializeComponent();
-            BindingContext = new HomeListViewPageViewModel();
-            
+            BindingContext = new HomeNewTasksViewModel();
         }
 
-        async private void Button_Clicked(object sender, EventArgs e)
+       async private void Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushModalAsync(new ItemListPage());
         }

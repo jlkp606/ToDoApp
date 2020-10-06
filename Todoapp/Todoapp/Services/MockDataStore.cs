@@ -27,7 +27,7 @@ namespace Todoapp.Services
         {
             items.Add(item);
 
-            return await Task.FromResult(true);
+            return await System.Threading.Tasks.Task.FromResult(true);
         }
 
         public async Task<bool> UpdateItemAsync(Item item)
@@ -36,7 +36,7 @@ namespace Todoapp.Services
             items.Remove(oldItem);
             items.Add(item);
 
-            return await Task.FromResult(true);
+            return await System.Threading.Tasks.Task.FromResult(true);
         }
 
         public async Task<bool> DeleteItemAsync(string id)
@@ -44,17 +44,17 @@ namespace Todoapp.Services
             var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
             items.Remove(oldItem);
 
-            return await Task.FromResult(true);
+            return await System.Threading.Tasks.Task.FromResult(true);
         }
 
         public async Task<Item> GetItemAsync(string id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await System.Threading.Tasks.Task.FromResult(items.FirstOrDefault(s => s.Id == id));
         }
 
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            return await System.Threading.Tasks.Task.FromResult(items);
         }
     }
 }

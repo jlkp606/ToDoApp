@@ -1,0 +1,18 @@
+﻿/*body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 16;
+}*/
+
+
+^contentpage {
+    background-color: #ffffff;
+    font-size: 16;
+    margin: 0;
+    padding: 0;
+}
+.secondary-btn {
+    color: #ffffff;
+    background-color: #5bc0de;
+}

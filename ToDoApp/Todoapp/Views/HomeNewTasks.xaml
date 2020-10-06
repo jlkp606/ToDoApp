@@ -1,10 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Class="Todoapp.Views.HomeListViewPage"
-            xmlns:todoapp="clr-namespace:Todoapp.Views"            >
-    <ContentPage Title="Important Tasks" Padding="8" >
-        <ContentPage.Content >
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todoapp.Views.HomeNewTasks" Padding="8">
+    <ContentPage.Content>
             <StackLayout>
                 <StackLayout>
                     <Label Text="{Binding UnitName}"
@@ -33,7 +31,7 @@
                                        TextColor="Red"
                                        VerticalTextAlignment="End"></Label>
 
-                                    <Button Text="Done" BorderRadius="12" HorizontalOptions="End" WidthRequest="80" BackgroundColor="Green"></Button>
+                                    <Button Text="Add" BorderRadius="12" HorizontalOptions="End" WidthRequest="80"  BackgroundColor="DarkBlue"></Button>
                                 </Grid>
 
                             </ViewCell>
@@ -41,21 +39,11 @@
                     </ListView.ItemTemplate>
                 </ListView>
 
-               
-               
+
                 <StackLayout Orientation="Horizontal" VerticalOptions="End" HorizontalOptions="Center">
                     <Button Text="Home"  WidthRequest="200"></Button>
                     <Button Text="Tasks"  WidthRequest="200" Clicked="Button_Clicked"></Button>
                 </StackLayout>
             </StackLayout>
         </ContentPage.Content>
-
-    </ContentPage>
-    
-    <todoapp:HomeNewTasks Title="New Tasks"></todoapp:HomeNewTasks>
-    
-        
-    
-</TabbedPage>
-
-
+</ContentPage>
