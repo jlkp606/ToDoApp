@@ -27,7 +27,7 @@
                     <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout Padding="10" Orientation="Horizontal" Spacing="10" x:DataType="model:Item">
-                                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="10" >
+                                        <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="10" VerticalOptions="Center">
                                             <Label Text="{Binding TaskName}"
                                                                LineBreakMode="NoWrap" 
                                                                Style="{DynamicResource ListItemTextStyle}" 
