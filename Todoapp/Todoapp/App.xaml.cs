@@ -20,17 +20,7 @@ namespace Todoapp
 
             DependencyService.Register<Services.ItemService>();
             DependencyService.Register<Services.UserService>();
-            //DependencyService.Register<User>();
             MainPage = new AppShell();
-            //MainPage = new CompletedItemListPage();
-            //MainPage = new LoginPage();
-            //MainPage = new HomeListViewPage();
-            //MainPage = new RegisterPage();
-            //MainPage = new ItemListPage();
-            //MainPage = new HomeNewTasks();
-            //MainPage = new CompletedTasksPage();
-            //MainPage = new CreateTaskPage();
-            //MainPage = new TaskDetailPage();
         }
 
 

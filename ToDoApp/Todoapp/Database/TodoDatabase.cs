@@ -63,10 +63,7 @@ namespace Todoapp.Database
                     await Database.CreateTablesAsync(CreateFlags.None, typeof(Item)).ConfigureAwait(false);
                 }
 
-                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Unit).Name))
-                {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(Unit)).ConfigureAwait(false);
-                }
+               
 
                 initialized = true;
             }
