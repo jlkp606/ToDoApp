@@ -2,15 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Todoapp.Views.CurrentItemListPage" 
-             xmlns:todoapp="clr-namespace:Todoapp.Views"
+             xmlns:todoapp="clr-namespace:Todoapp.Views"     
+              xmlns:service="clr-namespace:Todoapp.Services"  
              xmlns:local="clr-namespace:Todoapp.ViewModels"  
              xmlns:model="clr-namespace:Todoapp.Models">
-        <ContentPage.Content>
+    <ContentPage.Resources>
+        <service:DueDateConverter x:Key="DueDateConverter" />
+    </ContentPage.Resources>
+    
+
+    <ContentPage.Content>
             <StackLayout>
                 <RefreshView x:DataType="local:ItemListViewModel" Command="{Binding LoadItemsCurrentCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-                    <CollectionView x:Name="ItemsListView" ItemsSource="{Binding Items}" SelectionMode="None">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
+                    <CollectionView x:Name="ItemsListView" ItemsSource="{Binding Items}" SelectionMode="None" IsGrouped="True">
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout x:DataType="model:ItemGroup" Margin="0"  BackgroundColor="#668599">
+                                <Label Text="{Binding UnitName}" VerticalOptions="Center"
+                               TextColor="White"
+                               FontSize="Large"
+                               FontAttributes="Bold" />
+                                
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemTemplate>
+                      
+                        <DataTemplate>
                                 <StackLayout Padding="10" Orientation="Horizontal" Spacing="10" x:DataType="model:Item">
                                     <StackLayout HorizontalOptions="StartAndExpand" Orientation="Vertical" Margin="10" >
                                         <Label Text="{Binding TaskName}"
@@ -18,10 +36,10 @@
                                                                Style="{DynamicResource ListItemTextStyle}" 
                                                                FontSize="Medium"
                                                                FontAttributes="None"></Label>
-                                        <Label Text="{Binding UnitName}"
+                                    <Label Text="{Binding DueDate, Converter= {StaticResource DueDateConverter}}"
                                                LineBreakMode="NoWrap" 
                                                Style="{DynamicResource ListItemDetailTextStyle}" 
-                                               TextColor="Gray"
+                                               TextColor="Red"
                                                FontSize="Small"  ></Label>
 
                                         <Label Text="{Binding Description}" 
@@ -36,7 +54,14 @@
                                                        FontSize="Micro"
                                                        LineBreakMode="NoWrap" 
                                                        Style="{DynamicResource ListItemDetailTextStyle}" ></Label>
-                                    </StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            NumberOfTapsRequired="1"
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path=ItemTapped}"		
+                                            CommandParameter="{Binding .}"> 
+                                        </TapGestureRecognizer>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
                                     <StackLayout HorizontalOptions="End">
                                         <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= MoveToDoneCommand}"

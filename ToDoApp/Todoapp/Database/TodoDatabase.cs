@@ -38,7 +38,7 @@ namespace Todoapp.Database
            
             if (!initialized)
             {
-                // for debug
+                //// for debug
                 //if (Database.TableMappings.Any(m => m.MappedType.Name == typeof(User).Name))
                 //{
                 //    await Database.DropTableAsync<User>().ConfigureAwait(false);
@@ -51,11 +51,11 @@ namespace Todoapp.Database
                 //}
                 //await Database.CreateTablesAsync(CreateFlags.None, typeof(Item)).ConfigureAwait(false);
 
-                // for prod
+                //for prod
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(User).Name))
-                {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(User)).ConfigureAwait(false);
-                }
+                    {
+                        await Database.CreateTablesAsync(CreateFlags.None, typeof(User)).ConfigureAwait(false);
+                    }
 
 
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Item).Name))
@@ -63,7 +63,10 @@ namespace Todoapp.Database
                     await Database.CreateTablesAsync(CreateFlags.None, typeof(Item)).ConfigureAwait(false);
                 }
 
-
+                if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Unit).Name))
+                {
+                    await Database.CreateTablesAsync(CreateFlags.None, typeof(Unit)).ConfigureAwait(false);
+                }
 
                 initialized = true;
             }

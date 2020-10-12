@@ -78,6 +78,9 @@ namespace Todoapp.ViewModels
 
 		private async void OnSave()
 		{
+			int userId = 1;
+			if(App.CurrentUser != null)
+				userId = App.CurrentUser.Id;
 			Item newItem = new Item()
 			{
 				UnitName = UnitName,
@@ -85,7 +88,8 @@ namespace Todoapp.ViewModels
 				Status = "0",
 				DueDate = DueDate,
 				Description = Description,
-				Resource =Resource
+				Resource =Resource,
+				UserId = userId
 			};
 
 			await DataStore.AddItemAsync(newItem);

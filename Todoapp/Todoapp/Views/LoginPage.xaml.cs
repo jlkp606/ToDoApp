@@ -1,69 +1,74 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Todoapp.ViewModels;
+using SQLite;
+using Todoapp.Database;
+using Todoapp.Models;
+using Todoapp.Services;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using SQLite;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using Todoapp.Database;
 
 namespace Todoapp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+        private static IDataStore<User> DataStore => DependencyService.Get<IDataStore<User>>();
+        private UserService userService = DataStore as UserService;
         public LoginPage()
         {
             InitializeComponent();
-            this.BindingContext = new LoginViewModel();
         }
 
-        async private void Button_Clicked(object sender, EventArgs e)
+        private async void Register_Clicked(object sender, EventArgs e)
         {
+           
+            Content = new StackLayout
+            {
+                Children = {
+                    new Entry { Keyboard = Keyboard.Create(KeyboardFlags.None) }
+                    }
+            };
             await Navigation.PushModalAsync(new RegisterPage());
         }
 
-         async private void Button_Clicked_login(object sender, EventArgs e)
+        private async void Login_Clicked(object sender, EventArgs e)
         {
-            //var dbpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "UserDatabase.db");
-            //var db = new SQLiteConnection(dbpath);
-            //var myquery = db.Table<User>().Where(u =>
-            //u.UserName.Equals(EntryUserName.Text) && u.Password.Equals(EntryPassword.Text)).FirstOrDefault();
-
-            var myquery = "";
-
-            if (myquery!=null)
+            User user = null;
+            Content = new StackLayout
             {
-                Content = new StackLayout
-                {
-                    
-                    Children = {
+                Children = {
                     new Entry { Keyboard = Keyboard.Create(KeyboardFlags.None) }
-                }
-                };
-                //App.Current.MainPage = new NavigationPage(new HomeListViewPage());
-                //await Navigation.PushModalAsync(new HomeListViewPage());
-
+                    }
+            };
+            if (!String.IsNullOrWhiteSpace(EntryUserName.Text) && !String.IsNullOrWhiteSpace(EntryPassword.Text))
+            {
+                user = await userService.GetItemAsync(EntryUserName.Text, EntryPassword.Text);                
             }
-
+            if(user!= null)
+            {
+                Application.Current.Properties.Clear();
+                Application.Current.Properties["user"] = user;
+                App.CurrentUser = new User
+                {
+                    Id = user.Id,
+                    UserName = user.UserName,
+                    Email = user.Email
+                };
+                
+                await Shell.Current.GoToAsync("///ItemListPage");
+            }
             else
             {
                 Device.BeginInvokeOnMainThread(async () =>
                 {
-                    var result = await this.DisplayAlert("Error", "Failed User Name and Password", "Yes", "Cancel");
-                    if (result)
-                        await Navigation.PushModalAsync(new LoginPage());
-                    else
-                    {
-                        await Navigation.PushModalAsync(new LoginPage());
-                    }
+                    await this.DisplayAlert("Error", "Failed User Name and Password", "Yes", "Cancel");
                 });
+                await Navigation.PushModalAsync(new LoginPage());
             }
-
         }
     }
    

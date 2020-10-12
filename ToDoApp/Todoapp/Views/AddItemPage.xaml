@@ -15,9 +15,7 @@
                 <Entry Keyboard="Text" x:Name="EntryUnitName" Text="{Binding UnitName, Mode=TwoWay}"
                     Placeholder="UnitName:" PlaceholderColor="Black"/>
                 <Entry Keyboard="Text" x:Name="EntryTaskName" Text= "{Binding TaskName, Mode=TwoWay}"
-                    Placeholder="TaskName:" PlaceholderColor="Black"/>
-                <Entry Keyboard="Text" x:Name="EntryStatus" Text= "{Binding Status, Mode=TwoWay}"
-                    Placeholder="Status:" PlaceholderColor="Black"  />
+                    Placeholder="TaskName:" PlaceholderColor="Black"/>               
                 <Entry Keyboard="Text" x:Name="EntryDueDate" Text= "{Binding DueDate, Mode=TwoWay}"
                     Placeholder="DueDate:" PlaceholderColor="Black"/>
                 <Entry Keyboard="Text" x:Name="EntryDescription" Text= "{Binding Description, Mode=TwoWay}"

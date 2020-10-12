@@ -1,7 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Todoapp.Views.TaskDetailPage">
+             xmlns:service="clr-namespace:Todoapp.Services"  
+             x:Class="Todoapp.Views.ItemDetailPage">
+    <ContentPage.Resources>
+        <service:StatusConverter x:Key="StatusConverter" />
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Padding="30,40,0,0">
@@ -73,7 +77,7 @@
                                        VerticalTextAlignment="Start"></Label>
                 </StackLayout>
                 <StackLayout>
-                    <Label Text="{Binding Status}"
+                    <Label Text="{Binding Status, Converter = {StaticResource StatusConverter}}"
                                        TextColor="Black"
                                        FontSize="Large"
                                        FontAttributes="None"
@@ -125,17 +129,12 @@
                                        ></Label>
             </StackLayout>
             <StackLayout Padding="30,0">
-                <Label Text="{Binding TaskResource}"
+                <Label Text="{Binding Resource}"
                                        TextColor="DarkBlue"
                                        FontSize="Large"
                                        FontAttributes="None"></Label>
             </StackLayout>
-            <StackLayout Padding="0,25" Orientation="Horizontal" HorizontalOptions="Center">
-                <Button BackgroundColor="Green" BorderRadius="12"   WidthRequest="150" HorizontalOptions="Start" 
-                    Text="Completed"/>
-                <Button BackgroundColor="MidnightBlue" BorderRadius="12"  WidthRequest="150" HorizontalOptions="End"
-                    Text="OK"/>
-            </StackLayout>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -10,12 +10,12 @@ using Xamarin.Forms.Xaml;
 namespace Todoapp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TaskDetailPage : ContentPage
+    public partial class ItemDetailPage : ContentPage
     {
-        public TaskDetailPage()
+        public ItemDetailPage()
         {
             InitializeComponent();
-            BindingContext = new TaskDetailPageViewModel();
+            BindingContext = new ItemDetailViewModel();
 
         }
     }

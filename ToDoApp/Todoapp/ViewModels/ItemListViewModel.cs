@@ -15,11 +15,14 @@ namespace Todoapp.ViewModels
 {
     public class ItemListViewModel : BaseViewModel
     {
-		private IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+		private static IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+		private ItemService itemService = DataStore as ItemService;
 		private Item _selectedItem;
 		private string status;
-
-		public ObservableCollection<Item> Items { get; set; }
+		private List<Item> itemList = new List<Item>();
+		
+		public ObservableCollection<ItemGroup> Items { get; set; }
+		public ObservableCollection<Item> UnitItems { get; set; }
 		public Command LoadItemsCurrentCommand { get; }
 		public Command LoadItemsDoneCommand { get; }
 		public Command LoadItemsDueCommand { get; }
@@ -31,10 +34,11 @@ namespace Todoapp.ViewModels
 
 		public Command<Item> MoveToDoneCommand { get; }
 		public Command<Item>  MoveToInProgressCommand { get; }
-        public ItemListViewModel()
+		public Command SignOutCommand { get; }
+		public ItemListViewModel()
         {
 			Title = "Task List";
-			Items = new ObservableCollection<Item>();
+			Items = new ObservableCollection<ItemGroup>();
 			LoadItemsCurrentCommand = new Command(async () => await ExecuteLoadItemsCurrentCommand());
 			LoadItemsDoneCommand = new Command(async () => await ExecuteLoadItemsDoneCommand());
 			LoadItemsDueCommand = new Command(async () => await ExecuteLoadItemsDueCommand());
@@ -43,129 +47,11 @@ namespace Todoapp.ViewModels
 			MoveToDoneCommand = new Command<Item>(OnMoveToDone);
 			MoveToInProgressCommand = new Command<Item>(OnMoveToInProgress);
 			DeleteItemCommand = new Command<Item>(DeleteItem);
-
-			//ItemTapped = new Command<Item>(OnItemSelected);
+			SignOutCommand = new Command(async () => await ExecuteSignOutCommand());
+			ItemTapped = new Command<Item>(OnItemSelected);
 
 			AddItemCommand = new Command(OnAddItem);
 		}
-
-		async Task ExecuteLoadItemsCurrentCommand()
-		{
-			IsBusy = true;
-
-			try
-			{
-				Items.Clear();
-				var items = await (DataStore as ItemService).GetItemsCurrentAsync();
-				foreach (var item in items)
-				{
-					Items.Add(item);
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
-		}
-
-		async Task ExecuteLoadItemsDoneCommand()
-		{
-			IsBusy = true;
-
-			try
-			{
-				Items.Clear();
-				var items = await (DataStore as ItemService).GetItemsDoneAsync();
-				foreach (var item in items)
-				{
-					Items.Add(item);
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
-		}
-		async Task ExecuteLoadItemsDueCommand()
-		{
-			IsBusy = true;
-
-			try
-			{
-				Items.Clear();
-				var items = await (DataStore as ItemService).GetItemsDueAsync();
-				foreach (var item in items)
-				{
-					Items.Add(item);
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
-		}
-		async Task ExecuteLoadItemsInProgressCommand()
-		{
-			IsBusy = true;
-
-			try
-			{
-				Items.Clear();
-				var items = await (DataStore as ItemService).GetItemsInProgressAsync();
-				foreach (var item in items)
-				{
-					Items.Add(item);
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
-		}
-		async Task ExecuteLoadItemsBacklogCommand()
-		{
-			IsBusy = true;
-
-			try
-			{
-				Items.Clear();
-				var items = await (DataStore as ItemService).GetItemsBacklogAsync();
-				foreach (var item in items)
-				{
-					Items.Add(item);
-				}
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
-			}
-		}
-		public void OnAppearing()
-		{
-			IsBusy = true;
-			SelectedItem = null;
-		}
-
 		public Item SelectedItem
 		{
 			get => _selectedItem;
@@ -186,6 +72,179 @@ namespace Todoapp.ViewModels
 			}
 		}
 
+		
+		async Task ExecuteLoadItemsCurrentCommand()
+		{
+			IsBusy = true;
+
+			try
+			{
+				Items.Clear();
+				var units = await itemService.GetUnitAsync();
+				foreach (var unit in units)
+				{
+
+					var unititems = await itemService.GetItemsCurrentAsync(unit);
+					itemList.Clear();
+					foreach (var item in unititems)
+					{
+						itemList.Add(item);
+					}
+                    if (itemList.Count > 0)
+                    {
+						ItemGroup unitItems = new ItemGroup(unit, itemList);
+						Items.Add(unitItems);
+					}
+					
+				}
+
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+
+		async Task ExecuteLoadItemsDoneCommand()
+		{
+			IsBusy = true;
+
+			try
+			{
+				Items.Clear();
+				var units = await itemService.GetUnitAsync();
+				foreach (var unit in units)
+				{
+					var unititems = await itemService.GetItemsDoneAsync(unit);
+					itemList.Clear();
+					foreach (var item in unititems)
+					{
+						itemList.Add(item);
+					}
+					if (itemList.Count > 0)
+					{
+						ItemGroup unitItems = new ItemGroup(unit, itemList);
+						Items.Add(unitItems);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+		async Task ExecuteLoadItemsDueCommand()
+		{
+			IsBusy = true;
+
+			try
+			{
+				Items.Clear();
+				var units = await itemService.GetUnitAsync();
+				foreach (var unit in units)
+				{
+					var unititems = await itemService.GetItemsDueAsync(unit);
+					itemList.Clear();
+					foreach (var item in unititems)
+					{
+						itemList.Add(item);
+					}
+					if (itemList.Count > 0)
+					{
+						ItemGroup unitItems = new ItemGroup(unit, itemList);
+						Items.Add(unitItems);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+		async Task ExecuteLoadItemsInProgressCommand()
+		{
+			IsBusy = true;
+
+			try
+			{
+				Items.Clear();				
+				var units = await itemService.GetUnitAsync();
+				foreach (var unit in units)
+				{
+					var unititems = await itemService.GetItemsInProgressAsync(unit);
+					itemList.Clear();
+					foreach (var item in unititems)
+					{
+						itemList.Add(item);
+					}
+					if (itemList.Count > 0)
+					{
+						ItemGroup unitItems = new ItemGroup(unit, itemList);
+						Items.Add(unitItems);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+		async Task ExecuteLoadItemsBacklogCommand()
+		{
+			IsBusy = true;
+
+			try
+			{
+				Items.Clear();
+				var units = await itemService.GetUnitAsync();
+				foreach (var unit in units)
+				{
+					var unititems = await itemService.GetItemsBacklogAsync(unit);
+					itemList.Clear();
+					foreach (var item in unititems)
+					{
+						itemList.Add(item);
+					}
+					if (itemList.Count > 0)
+					{
+						ItemGroup unitItems = new ItemGroup(unit, itemList);
+						Items.Add(unitItems);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+		public void OnAppearing()
+		{
+			IsBusy = true;
+			SelectedItem = null;
+		}
+
+	
+
 
 		private async void OnAddItem(object obj)
 		{
@@ -197,7 +256,6 @@ namespace Todoapp.ViewModels
 			Item item = obj as Item;			
 			item.Status = ((int)ItemService.ItemStatus.Done).ToString();
 			ExecuteUpdateItem(item);
-			Item.RemoveItem(Items, item);
 		}
 
 		private void OnMoveToInProgress(object obj)
@@ -205,7 +263,6 @@ namespace Todoapp.ViewModels
 			Item item = obj as Item;
 			item.Status = ((int)ItemService.ItemStatus.InProgress).ToString();
 			ExecuteUpdateItem(item);
-			Item.RemoveItem(Items, item);
 		}
 		private async void ExecuteUpdateItem(object obj)
 		{
@@ -245,16 +302,19 @@ namespace Todoapp.ViewModels
 			}
 		}
 
-		
+		private async Task ExecuteSignOutCommand()
+        {
+			Application.Current.Properties.Clear();
+			await Shell.Current.GoToAsync(nameof(LoginPage));
+		}
 
+        async void OnItemSelected(Item item)
+        {
+            if (item == null)
+                return;
 
-		//async void OnItemSelected(Item item)
-		//{
-		//	if (item == null)
-		//		return;
-
-		//	// This will push the ItemDetailPage onto the navigation stack
-		//	await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
-		//}
-	}
+            // This will push the ItemDetailPage onto the navigation stack
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.Id)}={item.Id}");
+        }
+    }
 }

@@ -21,9 +21,9 @@
 
                 <StackLayout Padding="20" Spacing="15">
                     <Button BackgroundColor="Blue" BorderRadius="12"  
-                    Text="Login"  Clicked="Button_Clicked_login"/>
+                    Text="Login"  Clicked="Login_Clicked"/>
                     <Button BackgroundColor="LightBlue" BorderRadius="12" 
-                    Text="Register" TextColor="Blue" Clicked="Button_Clicked"/>
+                    Text="Register" TextColor="Blue" Clicked="Register_Clicked"/>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

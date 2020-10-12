@@ -17,6 +17,8 @@ namespace Todoapp.Views
         {
             InitializeComponent();
             BindingContext = _viewModel = new ItemListViewModel();
+            if(App.CurrentUser == null)
+                Navigation.PushModalAsync(new LoginPage());
         }
 
         protected override void OnAppearing()
@@ -37,7 +39,7 @@ namespace Todoapp.Views
 
         async private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            await Navigation.PushModalAsync(new TaskDetailPage());
+            await Navigation.PushModalAsync(new ItemDetailPage());
         }
     }
 }

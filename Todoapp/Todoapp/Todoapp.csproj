@@ -8,18 +8,15 @@
 
   <ItemGroup>
     <Compile Remove="Services\MockDataStore.cs" />
-    <Compile Remove="ViewModels\ItemDetailViewModel.cs" />
     <Compile Remove="ViewModels\ItemsSource.cs" />
     <Compile Remove="ViewModels\ItemsViewModel.cs" />
     <Compile Remove="ViewModels\NewItemViewModel.cs" />
-    <Compile Remove="Views\ItemDetailPage.xaml.cs" />
     <Compile Remove="Views\ItemsPage.xaml.cs" />
     <Compile Remove="Views\NewItemPage.xaml.cs" />
     <Compile Remove="Views\TaskPage.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Remove="Views\ItemDetailPage.xaml" />
     <EmbeddedResource Remove="Views\ItemsPage.xaml" />
     <EmbeddedResource Remove="Views\NewItemPage.xaml" />
     <EmbeddedResource Remove="Views\TaskPage.xaml" />
@@ -43,6 +40,9 @@
     </Compile>
     <Compile Update="Views\ItemListPage.xaml.cs">
       <DependentUpon>ItemListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ItemDetailPage.xaml.cs">
+      <DependentUpon>ItemDetailPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -71,7 +71,7 @@
     <EmbeddedResource Update="Views\InProgressItemListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\TaskDetailPage.xaml">
+    <EmbeddedResource Update="Views\ItemDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ItemListPage.xaml">

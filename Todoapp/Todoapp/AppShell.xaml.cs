@@ -12,8 +12,10 @@ namespace Todoapp
         {
             InitializeComponent();
             //Routing.RegisterRoute(nameof(ItemListPage), typeof(ItemListPage));
+            Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
             Routing.RegisterRoute(nameof(AddItemPage), typeof(AddItemPage));
-            Routing.RegisterRoute(nameof(AboutPage), typeof(AboutPage));
+            Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
         }
 
     }
