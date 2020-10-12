@@ -46,7 +46,7 @@ namespace Todoapp.Views
                 }
                 };
                 //App.Current.MainPage = new NavigationPage(new HomeListViewPage());
-                await Navigation.PushModalAsync(new HomeListViewPage());
+                //await Navigation.PushModalAsync(new HomeListViewPage());
 
             }
 

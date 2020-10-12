@@ -28,19 +28,19 @@ namespace Todoapp.Services
         }
         public Task<List<Item>> GetItemsDueAsync()
         {
-            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [DueDate] >= {Convert.ToDateTime(DateTime.Now).AddDays(-3)}");
+            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [DueDate] <= '{DateTime.Now.Date.AddDays(3.0):yyyy-MM-dd}'");
         }
         public Task<List<Item>> GetItemsDoneAsync()
         {
             return Database.QueryAsync<Item>("SELECT * FROM [Item] WHERE [Status] = 2");
         }
-        public Task<List<Item>> GetItemsCurrentAsync()
+        public Task<List<Item>> GetItemsCurrentAsync()                                                                                                                                                                                                                                                                                  
         {
             return Database.QueryAsync<Item>("SELECT * FROM [Item] WHERE [Status] != 2 AND [Status] IS NOT NULL");
         }
 
         public Task<Item> GetItemAsync(int id)
-        {
+        {                               
             return Database.Table<Item>().Where(i => i.Id == id).FirstOrDefaultAsync();
         }
 

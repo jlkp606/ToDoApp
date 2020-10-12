@@ -19,21 +19,18 @@ namespace Todoapp.ViewModels
 		private Item _selectedItem;
 		private string status;
 
-		public ObservableCollection<Item> Items { get; }
+		public ObservableCollection<Item> Items { get; set; }
 		public Command LoadItemsCurrentCommand { get; }
 		public Command LoadItemsDoneCommand { get; }
 		public Command LoadItemsDueCommand { get; }
 		public Command LoadItemsInProgressCommand { get; }
 		public Command LoadItemsBacklogCommand { get; }
 		public Command AddItemCommand { get; }
+		public Command DeleteItemCommand { get; }
 		public Command<Item> ItemTapped { get; }
 
 		public Command<Item> MoveToDoneCommand { get; }
 		public Command<Item>  MoveToInProgressCommand { get; }
-
-
-		public ObservableCollection<DisplayTask> DisplayTasks { get; set; }
-
         public ItemListViewModel()
         {
 			Title = "Task List";
@@ -45,6 +42,7 @@ namespace Todoapp.ViewModels
 			LoadItemsBacklogCommand = new Command(async () => await ExecuteLoadItemsBacklogCommand());
 			MoveToDoneCommand = new Command<Item>(OnMoveToDone);
 			MoveToInProgressCommand = new Command<Item>(OnMoveToInProgress);
+			DeleteItemCommand = new Command<Item>(DeleteItem);
 
 			//ItemTapped = new Command<Item>(OnItemSelected);
 
@@ -199,6 +197,7 @@ namespace Todoapp.ViewModels
 			Item item = obj as Item;			
 			item.Status = ((int)ItemService.ItemStatus.Done).ToString();
 			ExecuteUpdateItem(item);
+			Item.RemoveItem(Items, item);
 		}
 
 		private void OnMoveToInProgress(object obj)
@@ -206,6 +205,7 @@ namespace Todoapp.ViewModels
 			Item item = obj as Item;
 			item.Status = ((int)ItemService.ItemStatus.InProgress).ToString();
 			ExecuteUpdateItem(item);
+			Item.RemoveItem(Items, item);
 		}
 		private async void ExecuteUpdateItem(object obj)
 		{
@@ -214,6 +214,7 @@ namespace Todoapp.ViewModels
 			try
 			{
 				await (DataStore as ItemService).UpdateItemAsync(item);
+				Item.RemoveItem(Items, item);
 			}
 			catch (Exception ex)
 			{
@@ -224,6 +225,27 @@ namespace Todoapp.ViewModels
 				IsBusy = false;
 			}
 		}
+
+		private async void DeleteItem(object obj)
+		{
+			IsBusy = true;
+			Item item = obj as Item;
+			try
+			{
+				await (DataStore as ItemService).DeleteItemAsync(item);
+				Item.RemoveItem(Items, item);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex);
+			}
+			finally
+			{
+				IsBusy = false;
+			}
+		}
+
+		
 
 
 		//async void OnItemSelected(Item item)

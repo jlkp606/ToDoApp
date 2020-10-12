@@ -30,10 +30,13 @@
                                                        Style="{DynamicResource ListItemDetailTextStyle}" ></Label>
                                     </StackLayout>
                                     <StackLayout HorizontalOptions="End" VerticalOptions="Center">
-                                        <Button Text="Redo" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  
+                                        <Button Text="Redo" VerticalOptions="Center" BorderRadius="4" StyleClass="secondary-btn"  
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= MoveToInProgressCommand}"
                                                 CommandParameter="{Binding .}"></Button>
-                                    </StackLayout>
+                                    <Button Text="Delete" VerticalOptions="Center" BorderRadius="4" StyleClass="secondary-btn"  
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= DeleteItemCommand}"
+                                                CommandParameter="{Binding .}"></Button>
+                                </StackLayout>
                                 </StackLayout>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

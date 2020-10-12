@@ -15,7 +15,7 @@ namespace Todoapp.ViewModels
 		private string taskName;
 		private string description;
 		private string status;
-		private DateTime dueDate = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
+		private string dueDate = DateTime.Now.Date.AddDays(10.0).ToString("yyyy-MM-dd");
 		private string resource;
 		private IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 		public AddItemViewModel()
@@ -55,7 +55,7 @@ namespace Todoapp.ViewModels
 			set => SetProperty(ref status, value);
 		}
 
-		public DateTime DueDate
+		public String DueDate
 		{
 			get => dueDate;
 			set => SetProperty(ref dueDate, value);
