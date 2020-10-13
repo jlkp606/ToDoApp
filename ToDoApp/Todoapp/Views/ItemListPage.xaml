@@ -10,7 +10,6 @@
     <TabbedPage.ToolbarItems>
         <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}" />
     </TabbedPage.ToolbarItems>
-
     <todoapp:CurrentItemListPage Title="Current"></todoapp:CurrentItemListPage>
     <todoapp:DueItemListPage Title="Due"></todoapp:DueItemListPage>
     <todoapp:InProgressItemListPage Title="In Progress"></todoapp:InProgressItemListPage>
