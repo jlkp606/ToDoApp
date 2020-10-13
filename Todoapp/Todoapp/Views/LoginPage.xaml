@@ -6,26 +6,26 @@
              mc:Ignorable="d"
              x:Class="Todoapp.Views.LoginPage"
              Shell.NavBarIsVisible="False">
+
     <ContentPage.Content>
-        
-           
-       
-        <AbsoluteLayout>
-            <Label Text="Study Buddy" FontSize="50" FontAttributes="Bold" FontFamily="Lobster-Regular" TextColor="DarkGreen" AbsoluteLayout.LayoutBounds="58,200,0.75,0.10"  AbsoluteLayout.LayoutFlags="SizeProportional"/>
-                
-            
-            
-            <Entry Keyboard="Text" AbsoluteLayout.LayoutBounds="52,350,0.75,0.070"  AbsoluteLayout.LayoutFlags="SizeProportional"
+        <StackLayout>
+            <StackLayout  HeightRequest="100"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label Text="Study Buddy" FontSize="50" FontAttributes="Bold" FontFamily="Lobster-Regular" TextColor="DarkGreen" />
+            </StackLayout>
+
+            <StackLayout Padding="50">
+                <Entry Keyboard="Text" x:Name="EntryUserName"
                     Placeholder="Username:" PlaceholderColor="Black"  />
-            <Entry IsPassword="True" AbsoluteLayout.LayoutBounds="52,400,0.75,0.070"  AbsoluteLayout.LayoutFlags="SizeProportional"
+                <Entry IsPassword="True"  x:Name="EntryPassword"
                     Placeholder="Password:" PlaceholderColor="Black"/>
-            
-            
-            <Button BackgroundColor="Blue" BorderRadius="12"  AbsoluteLayout.LayoutBounds="52,480,0.75,0.060"  AbsoluteLayout.LayoutFlags="SizeProportional"
-                    Text="Log In" />
-            <Button BackgroundColor="LightBlue" BorderRadius="12" AbsoluteLayout.LayoutBounds="52,550,0.75,0.060"  AbsoluteLayout.LayoutFlags="SizeProportional"
-                    Text="Register" TextColor="Blue"/>
-        </AbsoluteLayout>
+
+                <StackLayout Padding="20" Spacing="15">
+                    <Button BackgroundColor="Blue" BorderRadius="12"  
+                    Text="Login"  Clicked="Login_Clicked"/>
+                    <Button BackgroundColor="LightBlue" BorderRadius="12" 
+                    Text="Register" TextColor="Blue" Clicked="Register_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
-    
 </ContentPage>

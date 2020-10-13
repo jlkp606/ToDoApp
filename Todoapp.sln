@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todoapp.Android", "Todoapp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todoapp.iOS", "Todoapp\Todoapp.iOS\Todoapp.iOS.csproj", "{12599DCE-5DD2-4BCA-A3EA-62D701071864}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todoapp", "Todoapp\Todoapp\Todoapp.csproj", "{7F304416-E8AD-4BCD-A219-6C24DBE6FDD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Todoapp", "Todoapp\Todoapp\Todoapp.csproj", "{7F304416-E8AD-4BCD-A219-6C24DBE6FDD1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

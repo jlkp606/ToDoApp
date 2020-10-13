@@ -27,6 +27,7 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-        </ResourceDictionary>        
+        </ResourceDictionary>
+        <StyleSheet Source="/Assets/styles.css" />
     </Application.Resources>
 </Application>

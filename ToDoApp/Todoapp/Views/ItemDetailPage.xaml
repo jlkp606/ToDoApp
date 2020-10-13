@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:service="clr-namespace:Todoapp.Services"  
+             x:Class="Todoapp.Views.ItemDetailPage">
+    <ContentPage.Resources>
+        <service:StatusConverter x:Key="StatusConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Padding="30,40,0,0">
+                <Label Text="Task Details" FontSize="30" FontAttributes="None" FontFamily="Lobster-Regular" HorizontalOptions="Start"
+                   TextColor="Blue" />
+
+            </StackLayout>
+            <StackLayout  Padding="30,10" Orientation="Horizontal">
+                <StackLayout>
+                <Label Text="Task:"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+                <StackLayout>
+                <Label Text="{Binding TaskName}"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout  Padding="30,10" Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="UnitName:"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="{Binding UnitName}"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout  Padding="30,10" Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="DueDate:"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="{Binding DueDate}"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                      
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout  Padding="30,10" Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="Status:"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="{Binding Status, Converter = {StaticResource StatusConverter}}"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout  Padding="30,10" Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="EstHours:"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="{Binding EstHours}"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout  Padding="30,10" Orientation="Horizontal">
+                <StackLayout>
+                    <Label Text="Description:"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="{Binding Description}"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"
+                                       
+                                       VerticalTextAlignment="Start"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Padding="30,0">
+                <Label Text="TaskResource:"
+                                       TextColor="Black"
+                                       FontSize="Large"
+                                       FontAttributes="None"                                       
+                                       ></Label>
+            </StackLayout>
+            <StackLayout Padding="30,0">
+                <Label Text="{Binding Resource}"
+                                       TextColor="DarkBlue"
+                                       FontSize="Large"
+                                       FontAttributes="None"></Label>
+            </StackLayout>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
