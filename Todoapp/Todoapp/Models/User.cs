@@ -1,10 +1,12 @@
-﻿using SQLite;
+
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Todoapp.Models
 {
+
     public class User
     {
         [PrimaryKey, AutoIncrement]
@@ -15,5 +17,5 @@ namespace Todoapp.Models
 
         public string Password { get; set; }
     }
-}
 
+}
