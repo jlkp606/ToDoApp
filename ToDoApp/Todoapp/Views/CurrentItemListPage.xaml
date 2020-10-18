@@ -12,8 +12,8 @@
     
 
     <ContentPage.Content>
-            <StackLayout>
-                <RefreshView x:DataType="local:ItemListViewModel" Command="{Binding LoadItemsCurrentCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+        <StackLayout>
+            <RefreshView x:DataType="local:ItemListViewModel" Command="{Binding LoadItemsCurrentCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                     <CollectionView x:Name="ItemsListView" ItemsSource="{Binding Items}" SelectionMode="None" IsGrouped="True">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate>

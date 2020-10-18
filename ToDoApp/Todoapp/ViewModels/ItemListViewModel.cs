@@ -11,16 +11,18 @@ using Todoapp.Services;
 using Todoapp.Views;
 using Xamarin.Forms;
 
+using Xamarin.Forms.Xaml;
+
 namespace Todoapp.ViewModels
 {
-    public class ItemListViewModel : BaseViewModel
-    {
+	public class ItemListViewModel : BaseViewModel
+	{
 		private static IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 		private ItemService itemService = DataStore as ItemService;
 		private Item _selectedItem;
 		private string status;
 		private List<Item> itemList = new List<Item>();
-		
+
 		public ObservableCollection<ItemGroup> Items { get; set; }
 		public ObservableCollection<Item> UnitItems { get; set; }
 		public Command LoadItemsCurrentCommand { get; }
@@ -33,8 +35,29 @@ namespace Todoapp.ViewModels
 		public Command<Item> ItemTapped { get; }
 
 		public Command<Item> MoveToDoneCommand { get; }
-		public Command<Item>  MoveToInProgressCommand { get; }
+		public Command<Item> MoveToInProgressCommand { get; }
 		public Command SignOutCommand { get; }
+
+		string unit = "Cab203";
+
+        List<string> unitList = new List<string>() { "Cab203", "IAB330", "MXB295" };
+
+		public string Unit
+        {
+			get { return ("Unit: " + unit); }
+        }
+
+		public List<string> UnitList
+        {
+			get { return unitList; }
+        }
+
+		async void OnActionSheetSimpleClicked()
+        {
+			string action = await DisplayActionSheet("Choose Unit Filter", "Cab203", "cab567");
+        }
+
+
 		public ItemListViewModel()
         {
 			Title = "Task List";
@@ -52,6 +75,9 @@ namespace Todoapp.ViewModels
 
 			AddItemCommand = new Command(OnAddItem);
 		}
+
+
+
 		public Item SelectedItem
 		{
 			get => _selectedItem;
