@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Todoapp.Models
 {
-    class Class1
+    class Unit
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }
