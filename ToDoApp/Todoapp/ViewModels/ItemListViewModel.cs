@@ -52,13 +52,13 @@ namespace Todoapp.ViewModels
 			get { return unitList; }
         }
 
-		async void OnActionSheetSimpleClicked()
+        async void OnActionSheetSimpleClicked()
         {
-			string action = await DisplayActionSheet("Choose Unit Filter", "Cab203", "cab567");
+            string action = await App.Current.MainPage.DisplayActionSheet("Choose Unit Filter", "Cab203", "cab567");
         }
 
 
-		public ItemListViewModel()
+        public ItemListViewModel()
         {
 			Title = "Task List";
 			Items = new ObservableCollection<ItemGroup>();

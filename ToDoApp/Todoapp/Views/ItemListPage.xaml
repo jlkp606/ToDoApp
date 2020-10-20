@@ -12,7 +12,7 @@
     </TabbedPage.Resources>
     
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Text="{Binding Unit}" Command="{Binding OnActionSheetSimpleClicked}" />
+        <!--<ToolbarItem Text="{Binding Unit}" Command="{Binding OnActionSheetSimpleClicked}" />-->
         <ToolbarItem Text="Sign Out" Command="{Binding SignOutCommand}" />
     </TabbedPage.ToolbarItems>
     <todoapp:CurrentItemListPage Title="Current"></todoapp:CurrentItemListPage>
