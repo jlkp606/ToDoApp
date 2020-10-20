@@ -13,9 +13,12 @@ namespace Todoapp.ViewModels
     {
 		private string unitName;
 		private string taskName;
+		private int estHours;
 		private string description;
 		private string status;
 		private string dueDate = DateTime.Now.Date.AddDays(10.0).ToString("yyyy-MM-dd");
+		private string minDate = DateTime.Now.Date.ToString("yyyy-MM-dd");
+		private string maxDate = DateTime.Now.Date.AddYears(10).ToString("yyyy-MM-dd");
 		private string resource;
 		private IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
 		public AddItemViewModel()
@@ -43,6 +46,11 @@ namespace Todoapp.ViewModels
 			get => unitName;
 			set => SetProperty(ref unitName, value);
 		}
+		public int EstHours
+		{
+			get => estHours;
+			set => SetProperty(ref estHours, value);
+		}
 
 		public string Description
 		{
@@ -59,6 +67,17 @@ namespace Todoapp.ViewModels
 		{
 			get => dueDate;
 			set => SetProperty(ref dueDate, value);
+		}
+		public String MinDate
+		{
+			get => minDate;
+			set => SetProperty(ref minDate, value);
+		}
+
+		public String MaxDate
+		{
+			get => maxDate;
+			set => SetProperty(ref maxDate, value);
 		}
 
 		public string Resource
@@ -81,12 +100,26 @@ namespace Todoapp.ViewModels
 			int userId = 1;
 			if(App.CurrentUser != null)
 				userId = App.CurrentUser.Id;
+			string strDue = "";
+			if(!String.IsNullOrEmpty(DueDate))
+			{
+				try
+				{
+					DateTime due = DateTime.Parse(DueDate);
+					strDue = string.Format("{0:yyyy-MM-dd}", due);
+				}
+				catch
+				{
+					strDue = "1970-01-01";
+				}
+			}	
 			Item newItem = new Item()
 			{
 				UnitName = UnitName,
 				TaskName = TaskName,
+				EstHours = EstHours,
 				Status = "0",
-				DueDate = DueDate,
+				DueDate = strDue,
 				Description = Description,
 				Resource =Resource,
 				UserId = userId

@@ -13,7 +13,6 @@ namespace Todoapp
     public partial class App : Application
     {
         static TodoDatabase database;
-        static User user;
         public App()
         {
             InitializeComponent();

@@ -311,26 +311,31 @@ namespace Todoapp.ViewModels
 
 		private async void DeleteItem(object obj)
 		{
-			IsBusy = true;
-			Item item = obj as Item;
-			try
+			bool result = await App.Current.MainPage.DisplayAlert("Warning", "Do you really want to delete this item?", "Yes", "Cancel");
+			if (result)
 			{
-				await (DataStore as ItemService).DeleteItemAsync(item);
-				Item.RemoveItem(Items, item);
-			}
-			catch (Exception ex)
-			{
-				Debug.WriteLine(ex);
-			}
-			finally
-			{
-				IsBusy = false;
+				IsBusy = true;
+				Item item = obj as Item;
+				try
+				{
+					await (DataStore as ItemService).DeleteItemAsync(item);
+					Item.RemoveItem(Items, item);
+				}
+				catch (Exception ex)
+				{
+					Debug.WriteLine(ex);
+				}
+				finally
+				{
+					IsBusy = false;
+				}
 			}
 		}
 
 		private async Task ExecuteSignOutCommand()
         {
 			Application.Current.Properties.Clear();
+			App.CurrentUser = null;
 			await Shell.Current.GoToAsync(nameof(LoginPage));
 		}
 

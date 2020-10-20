@@ -8,6 +8,7 @@
              xmlns:model="clr-namespace:Todoapp.Models">
     <TabbedPage.Resources>
         <service:DueDateConverter x:Key="DueDateConverter" />
+        <service:DateConverter x:Key="DateConverter" />
     </TabbedPage.Resources>
     <ContentPage.Content>
             <StackLayout>
@@ -52,10 +53,10 @@
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
                                     <StackLayout HorizontalOptions="End" VerticalOptions="Center">
-                                        <Button Text="Redo" VerticalOptions="Center" BorderRadius="4" StyleClass="secondary-btn"  
+                                    <Button Text="Redo" VerticalOptions="Center" BorderRadius="4" StyleClass="secondary-btn"  BackgroundColor="#4da6ff"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= MoveToInProgressCommand}"
                                                 CommandParameter="{Binding .}"></Button>
-                                    <Button Text="Delete" VerticalOptions="Center" BorderRadius="4" StyleClass="secondary-btn"  
+                                    <Button Text="Delete" VerticalOptions="Center" BorderRadius="4" StyleClass="secondary-btn"  BackgroundColor="#ff4d4d"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= DeleteItemCommand}"
                                                 CommandParameter="{Binding .}"></Button>
                                 </StackLayout>

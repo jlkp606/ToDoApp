@@ -14,32 +14,38 @@ namespace Todoapp.Services
     public class ItemService : IDataStore<Item>
     {
         static SQLiteAsyncConnection Database = App.Database.DatabaseInstance;
-        int userId = App.CurrentUser!= null? App.CurrentUser.Id: 0;
+       
         public Task<List<Item>> GetItemsAsync(string condition = "")
         {
+            int userId = App.CurrentUser != null ? App.CurrentUser.Id : 0;
             if (!string.IsNullOrWhiteSpace(condition))
-                return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE ([UserId] = {userId} or {userId} = 0) AND {condition}");
+                return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [UserId] = {userId} AND {condition}");
             return Database.Table<Item>().ToListAsync();
         }
         public Task<List<Item>> GetItemsBacklogAsync(string unit)
         {
-            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE ([UserId] = {userId} or {userId} = 0) AND [UnitName]= '{unit}' AND [Status] = 0");
+            int userId = App.CurrentUser != null ? App.CurrentUser.Id : 0;
+            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [UserId] = {userId} AND [UnitName]= '{unit}' AND [Status] = 0");
         }
         public Task<List<Item>> GetItemsInProgressAsync(string unit)
         {
-            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE ([UserId] = {userId} or {userId} = 0) AND [UnitName]= '{unit}' AND [Status] = 1");
+            int userId = App.CurrentUser != null ? App.CurrentUser.Id : 0;
+            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [UserId] = {userId}  AND [UnitName]= '{unit}' AND [Status] = 1");
         }
         public Task<List<Item>> GetItemsDueAsync(string unit)
         {
-            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE ([UserId] = {userId} or {userId} = 0) AND [UnitName]= '{unit}' AND [DueDate] <= '{DateTime.Now.Date.AddDays(3.0):yyyy-MM-dd}'");
+            int userId = App.CurrentUser != null ? App.CurrentUser.Id : 0;
+            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [UserId] = {userId}  AND [UnitName]= '{unit}' AND [DueDate] <= '{DateTime.Now.Date.AddDays(3.0):yyyy-MM-dd}'");
         }
         public Task<List<Item>> GetItemsDoneAsync(string unit)
         {
-            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE ([UserId] = {userId} or {userId} = 0) AND [UnitName]= '{unit}' AND [Status] = 2");
+            int userId = App.CurrentUser != null ? App.CurrentUser.Id : 0;
+            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [UserId] = {userId} AND [UnitName]= '{unit}' AND [Status] = 2");
         }
         public Task<List<Item>> GetItemsCurrentAsync(string unit)
         {
-            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE ([UserId] = {userId} or {userId} = 0) AND [UnitName]= '{unit}' AND [Status] != 2 AND [Status] IS NOT NULL");
+            int userId = App.CurrentUser != null ? App.CurrentUser.Id : 0;
+            return Database.QueryAsync<Item>($"SELECT * FROM [Item] WHERE [UserId] = {userId} AND [UnitName]= '{unit}' AND [Status] != 2 AND [Status] IS NOT NULL");
         }
 
         public Task<Item> GetItemAsync(int id)
@@ -94,7 +100,48 @@ namespace Todoapp.Services
             }
             else
             {
-                return $"{(DateTime.Parse(dueDate).Date - DateTime.Now.Date).TotalDays} days due!";
+				try {
+                    DateTime due = DateTime.Parse(dueDate);
+                    return $"{(due.Date - DateTime.Now.Date).TotalDays} days due!";
+                }
+				catch
+				{
+                    return "Wrong Date Value!";
+                }
+               
+            }
+
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DateConverter : IValueConverter
+    {
+
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            var date = ((string)value);
+            if (date != null &&
+                string.IsNullOrWhiteSpace(date))
+            {
+                return "Not Specified!";
+            }
+            else
+            {
+                try
+                {
+                    DateTime due = DateTime.Parse(date);
+                    return string.Format("{0:MMM dd, yyyy}",due);
+                }
+                catch
+                {
+                    return "Wrong Date Value!";
+                }
+
             }
 
         }

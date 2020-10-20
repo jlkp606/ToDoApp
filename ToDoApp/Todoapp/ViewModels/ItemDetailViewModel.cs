@@ -24,7 +24,7 @@ namespace Todoapp.ViewModels
         private string id = "0";
         private string dueDate = "03/10/2020";
         private string status = "0";
-        private string estHours = "40";
+        private int estHours = 40;
         private string description = "Create a React App";
         private string resource = "https://docs.microsoft.com/en-us/xamarin/android/data-cloud/data-access/using-sqlite-orm";
 
@@ -52,7 +52,7 @@ namespace Todoapp.ViewModels
             get => status;
             set => SetProperty(ref status, value);
         }
-        public string EstHours
+        public int EstHours
         {
             get => estHours;
             set => SetProperty(ref estHours, value);
@@ -89,7 +89,8 @@ namespace Todoapp.ViewModels
                 UnitName = item.UnitName;
                 TaskName = item.TaskName;
                 Status = item.Status;
-                //EstHours = item.EstHours;
+                DueDate = item.DueDate;
+                EstHours = item.EstHours;
                 Description = item.Description;
                 Resource = item.Resource;
             }

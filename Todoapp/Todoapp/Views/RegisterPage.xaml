@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              Title="{Binding Title}"
+             xmlns:local="clr-namespace:Todoapp.ViewModels" 
              mc:Ignorable="d"
              x:Class="Todoapp.Views.RegisterPage"
              Shell.NavBarIsVisible="False">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:DataType="local:LoginViewModel">
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="20">
             <Label Text="New User Registeration" FontSize="30" FontAttributes="None" FontFamily="Lobster-Regular" 
                    TextColor="Blue" />
@@ -17,15 +19,15 @@
             </StackLayout>
         </StackLayout>
             <StackLayout Padding="50">
-                <Entry Keyboard="Text"  x:Name="EntryUserName"
+                <Entry Keyboard="Text"  x:Name="EntryUserName" Text="{Binding UserName, Mode=TwoWay}"
                     Placeholder="Username:" PlaceholderColor="Black"  />
-                <Entry Keyboard="Email" x:Name="EntryEmail"
+                <Entry Keyboard="Email" x:Name="EntryEmail" Text="{Binding Email, Mode=TwoWay}"
                     Placeholder="Email:" PlaceholderColor="Black"  />
-                <Entry IsPassword="True" x:Name="EntryPassword"
+                <Entry IsPassword="True" x:Name="EntryPassword" Text="{Binding Password, Mode=TwoWay}"
                     Placeholder="Password:" PlaceholderColor="Black"/>
                 <StackLayout Padding="20">
                     <Button BackgroundColor="Blue" BorderRadius="12"  
-                    Text="Register" Clicked="Button_Clicked"/>
+                    Text="Register" Command="{Binding Source={RelativeSource AncestorType={x:Type local:LoginViewModel}}, Path= RegisterCommand}"/>
             </StackLayout>
         </StackLayout>
         </StackLayout>

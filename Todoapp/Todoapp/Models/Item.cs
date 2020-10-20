@@ -13,7 +13,7 @@ namespace Todoapp.Models
         public int Id { get; set; }
         public string UnitName { get; set; }
         public string TaskName { get; set; }
-        //public string UserId { get; set; }
+        public int EstHours { get; set; }
         
         public string DueDate { get; set; }
         public string Status { get; set; }
