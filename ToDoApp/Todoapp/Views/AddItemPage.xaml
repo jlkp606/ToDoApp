@@ -6,24 +6,45 @@
              Title="New Task">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Padding="50,70,0,0">
+            <StackLayout Padding="50,20,0,0">
                 <Label Text="Create Task" FontSize="30" FontAttributes="None" FontFamily="Lobster-Regular" HorizontalOptions="Start"
-                   TextColor="Blue" />
+                   TextColor="#333333" />
                
             </StackLayout>
             <StackLayout Padding="50,10">
-                <Entry Keyboard="Text" x:Name="EntryUnitName" Text="{Binding UnitName, Mode=TwoWay}"
-                    Placeholder="UnitName:" PlaceholderColor="Black"/>
-                <Entry Keyboard="Text" x:Name="EntryTaskName" Text= "{Binding TaskName, Mode=TwoWay}"
-                    Placeholder="TaskName:" PlaceholderColor="Black"/>               
-                <Entry Keyboard="Text" x:Name="EntryDueDate" Text= "{Binding DueDate, Mode=TwoWay}"
-                    Placeholder="DueDate:" PlaceholderColor="Black"/>
-                <Entry Keyboard="Text" x:Name="EntryDescription" Text= "{Binding Description, Mode=TwoWay}"
-                    Placeholder="Description:" PlaceholderColor="Black"/>
-                <Entry Keyboard="Text" x:Name="EntryResource" Text= "{Binding Resource, Mode=TwoWay}"
-                    Placeholder="Resource:" PlaceholderColor="Black"/>
-                <StackLayout Padding="0,50" Orientation="Horizontal" HorizontalOptions="Center">
-                    <Button BackgroundColor="IndianRed" BorderRadius="12"   WidthRequest="150" HorizontalOptions="Start" 
+                <StackLayout>
+                    <Label Text="Unit Name:" />
+                    <Entry Keyboard="Text" x:Name="EntryUnitName" Text="{Binding UnitName, Mode=TwoWay}"
+                    Placeholder="" PlaceholderColor="Black"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Task Name:" />
+                    <Entry Keyboard="Text" x:Name="EntryTaskName" Text= "{Binding TaskName, Mode=TwoWay}"
+                    Placeholder="" PlaceholderColor="Black"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Due Date:" />
+                    <DatePicker x:Name="EntryDueDate" MinimumDate="{Binding MinDate}"
+                    MaximumDate="{Binding MaxDate}" Format="D"
+                    Date="{Binding DueDate, Mode=TwoWay}" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Est Hours:" />
+                    <Entry Keyboard="Text" x:Name="EntryEstHours" Text= "{Binding EstHours, Mode=TwoWay}"
+                    Placeholder="" PlaceholderColor="Black"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Description:" />
+                    <Entry Keyboard="Text" x:Name="EntryDescription" Text= "{Binding Description, Mode=TwoWay}"
+                    Placeholder="" PlaceholderColor="Black"/>
+                </StackLayout>
+                <StackLayout>
+                    <Label Text="Resource:" />
+                    <Entry Keyboard="Text" x:Name="EntryResource" Text= "{Binding Resource, Mode=TwoWay}"
+                        Placeholder="" PlaceholderColor="Black"/>
+                </StackLayout>
+                <StackLayout Padding="0,10" Orientation="Horizontal" HorizontalOptions="Center">
+                    <Button BackgroundColor="#ff4d4d" BorderRadius="12"   WidthRequest="150" HorizontalOptions="Start" 
                     Text="Cancel" Command="{Binding CancelCommand}"/>
                     <Button BackgroundColor="DarkBlue" BorderRadius="12"  WidthRequest="150" HorizontalOptions="End"
                     Text="Add" Command="{Binding SaveCommand}"/>

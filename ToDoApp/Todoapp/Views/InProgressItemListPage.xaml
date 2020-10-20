@@ -8,6 +8,7 @@
              xmlns:model="clr-namespace:Todoapp.Models">
     <ContentPage.Resources>
         <service:DueDateConverter x:Key="DueDateConverter" />
+        <service:DateConverter x:Key="DateConverter" />
     </ContentPage.Resources>
     <ContentPage.Content>
                 <StackLayout>
@@ -52,7 +53,7 @@
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
                                         <StackLayout HorizontalOptions="End" VerticalOptions="Center">
-                                            <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  
+                                    <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn" BackgroundColor="#4da6ff"
                                                     Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= MoveToDoneCommand}"
                                                     CommandParameter="{Binding .}"></Button>
                                     </StackLayout>

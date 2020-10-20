@@ -5,6 +5,7 @@
              x:Class="Todoapp.Views.ItemDetailPage">
     <ContentPage.Resources>
         <service:StatusConverter x:Key="StatusConverter" />
+        <service:DateConverter x:Key="DateConverter" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
@@ -59,7 +60,7 @@
                                        VerticalTextAlignment="Start"></Label>
                 </StackLayout>
                 <StackLayout>
-                    <Label Text="{Binding DueDate}"
+                    <Label Text="{Binding DueDate, Converter= {StaticResource DateConverter}}"
                                        TextColor="Black"
                                        FontSize="Large"
                                        FontAttributes="None"

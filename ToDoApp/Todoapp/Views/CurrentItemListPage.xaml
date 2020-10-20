@@ -8,6 +8,7 @@
              xmlns:model="clr-namespace:Todoapp.Models">
     <ContentPage.Resources>
         <service:DueDateConverter x:Key="DueDateConverter" />
+        <service:DateConverter x:Key="DateConverter" />
     </ContentPage.Resources>
     
 
@@ -40,6 +41,7 @@
                                                LineBreakMode="NoWrap" 
                                                Style="{DynamicResource ListItemDetailTextStyle}" 
                                                TextColor="Red"
+                                           
                                                FontSize="Small"  ></Label>
 
                                         <!--<Label Text="{Binding Description}" 
@@ -50,7 +52,7 @@
                                                        FontSize="Micro"
                                                        LineBreakMode="NoWrap" 
                                                        Style="{DynamicResource ListItemDetailTextStyle}" ></Label>-->
-                                        <Label Text="{Binding DueDate}" 
+                                    <Label Text="{Binding DueDate, Converter= {StaticResource DateConverter}}" 
                                                        FontSize="Micro"
                                                        LineBreakMode="NoWrap" 
                                                        Style="{DynamicResource ListItemDetailTextStyle}" ></Label>
@@ -63,7 +65,7 @@
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
                                     <StackLayout HorizontalOptions="End">
-                                        <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  
+                                    <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  BackgroundColor="#4da6ff"
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= MoveToDoneCommand}"
                                                 CommandParameter="{Binding .}"></Button>
                                     </StackLayout>
