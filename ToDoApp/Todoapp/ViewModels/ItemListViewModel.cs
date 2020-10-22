@@ -52,13 +52,13 @@ namespace Todoapp.ViewModels
 
 			AddItemCommand = new Command(OnAddItem);
 		}
+		
 		public Item SelectedItem
 		{
 			get => _selectedItem;
 			set
 			{
 				SetProperty(ref _selectedItem, value);
-				//OnItemSelected(value);
 			}
 		}
 
@@ -68,7 +68,6 @@ namespace Todoapp.ViewModels
 			set
 			{
 				SetProperty(ref status, value);
-				//OnItemSelected(value);
 			}
 		}
 
