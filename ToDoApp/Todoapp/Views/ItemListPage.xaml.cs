@@ -25,18 +25,7 @@ namespace Todoapp.Views
         {
             base.OnAppearing();
             _viewModel.OnAppearing();
-        }
-
-        //async private void Button_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushModalAsync(new HomeListViewPage());
-        //}
-
-        //async private void Button_Clicked_create(object sender, EventArgs e)
-        //{
-            //await Navigation.PushModalAsync(new AddItemPage());
-        //}
-
+        }    
         async private void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             await Navigation.PushModalAsync(new ItemDetailPage());
