@@ -38,7 +38,7 @@ namespace Todoapp.Database
            
             if (!initialized)
             {
-                //// for debug
+                // for debug
 
                 //await Database.DropTableAsync<User>().ConfigureAwait(false);
                 //await Database.CreateTablesAsync(CreateFlags.None, typeof(User)).ConfigureAwait(false);
@@ -57,8 +57,6 @@ namespace Todoapp.Database
                 {
                     await Database.CreateTablesAsync(CreateFlags.None, typeof(Item)).ConfigureAwait(false);
                 }
-
-
 
                 initialized = true;
             }
