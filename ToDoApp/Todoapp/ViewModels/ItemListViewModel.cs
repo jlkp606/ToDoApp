@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -33,6 +34,8 @@ namespace Todoapp.ViewModels
 		public Command AddItemCommand { get; }
 		public Command DeleteItemCommand { get; }
 		public Command<Item> ItemTapped { get; }
+
+		public Command GoToPrivacyCommand { get; }
 
 		public Command<Item> MoveToDoneCommand { get; }
 		public Command<Item> MoveToInProgressCommand { get; }
@@ -72,10 +75,15 @@ namespace Todoapp.ViewModels
 			DeleteItemCommand = new Command<Item>(DeleteItem);
 			SignOutCommand = new Command(async () => await ExecuteSignOutCommand());
 			ItemTapped = new Command<Item>(OnItemSelected);
+			GoToPrivacyCommand = new Command(GoToPrivacy);
 
 			AddItemCommand = new Command(OnAddItem);
 		}
 
+		private async void GoToPrivacy()
+        {
+			await App.Current.MainPage.Navigation.PushModalAsync(new PrivacyPage());
+		}
 
 
 		public Item SelectedItem
