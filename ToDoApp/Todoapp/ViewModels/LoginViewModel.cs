@@ -25,6 +25,7 @@ namespace Todoapp.ViewModels
 		public Command LoginCommand { get; }
 		public Command RegisterCommand { get; }
 		public Command GotoRegisterCommand { get; }
+		public Command BackToLoginCommand { get; }
 		public LoginViewModel()
 		{
 			Title = "User Login";
@@ -33,6 +34,7 @@ namespace Todoapp.ViewModels
 
 			LoginCommand = new Command(OnLogin);
 			GotoRegisterCommand = new Command(GotoRegister);
+			BackToLoginCommand = new Command(BackToLogin);
 		}
 		private bool ValidateRegister()
 		{
@@ -85,6 +87,10 @@ namespace Todoapp.ViewModels
 		private async void GotoRegister()
 		{
 			await App.Current.MainPage.Navigation.PushModalAsync(new RegisterPage());
+		}
+		private async void BackToLogin()
+        {
+			await App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
 		}
 		private async void OnRegister()
 		{

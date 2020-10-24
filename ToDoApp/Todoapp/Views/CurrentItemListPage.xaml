@@ -8,13 +8,12 @@
              xmlns:model="clr-namespace:Todoapp.Models">
     <ContentPage.Resources>
         <service:DueDateConverter x:Key="DueDateConverter" />
-        <service:DateConverter x:Key="DateConverter" />
     </ContentPage.Resources>
     
 
     <ContentPage.Content>
-        <StackLayout>
-            <RefreshView x:DataType="local:ItemListViewModel" Command="{Binding LoadItemsCurrentCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <StackLayout>
+                <RefreshView x:DataType="local:ItemListViewModel" Command="{Binding LoadItemsCurrentCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                     <CollectionView x:Name="ItemsListView" ItemsSource="{Binding Items}" SelectionMode="None" IsGrouped="True">
                     <CollectionView.GroupHeaderTemplate>
                         <DataTemplate>
@@ -41,7 +40,6 @@
                                                LineBreakMode="NoWrap" 
                                                Style="{DynamicResource ListItemDetailTextStyle}" 
                                                TextColor="Red"
-                                           
                                                FontSize="Small"  ></Label>
 
                                         <!--<Label Text="{Binding Description}" 
@@ -52,7 +50,7 @@
                                                        FontSize="Micro"
                                                        LineBreakMode="NoWrap" 
                                                        Style="{DynamicResource ListItemDetailTextStyle}" ></Label>-->
-                                    <Label Text="{Binding DueDate, Converter= {StaticResource DateConverter}}" 
+                                        <Label Text="{Binding DueDate}" 
                                                        FontSize="Micro"
                                                        LineBreakMode="NoWrap" 
                                                        Style="{DynamicResource ListItemDetailTextStyle}" ></Label>
@@ -65,7 +63,7 @@
                                     </StackLayout.GestureRecognizers>
                                 </StackLayout>
                                     <StackLayout HorizontalOptions="End">
-                                    <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  BackgroundColor="#4da6ff"
+                                        <Button Text="Done" VerticalOptions="CenterAndExpand" BorderRadius="4" StyleClass="secondary-btn"  
                                                 Command="{Binding Source={RelativeSource AncestorType={x:Type local:ItemListViewModel}}, Path= MoveToDoneCommand}"
                                                 CommandParameter="{Binding .}"></Button>
                                     </StackLayout>

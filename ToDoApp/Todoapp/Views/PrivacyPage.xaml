@@ -4,9 +4,19 @@
              x:Class="Todoapp.Views.PrivacyPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
+            <Label Text="Privacy Policy"
+                VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Label
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" >
+                <Label.Text>
+                   We do not store or have access to your
+any of your personal information 
+even of those that you have provided to us. 
+Please send your enquiries to enquiries@studybuddy.com
+                </Label.Text>
+            </Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
