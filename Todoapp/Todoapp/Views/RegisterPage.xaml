@@ -11,13 +11,17 @@
     <ContentPage.Content>
         <StackLayout x:DataType="local:LoginViewModel">
             <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="20">
-            <Label Text="New User Registeration" FontSize="30" FontAttributes="None" FontFamily="Lobster-Regular" 
-                   TextColor="Blue" />
+                <Label Text="Register" FontSize="40" FontAttributes="None" FontFamily="Lobster-Regular" Padding="20"
+                       TextColor="Blue" />
                 <StackLayout HorizontalOptions="CenterAndExpand">
                     <Label Text="Welcome to Study Buddy" FontSize="20" FontAttributes="Italic" FontFamily="Lobster-Regular" 
-                   TextColor="Blue" />
+                    TextColor="Blue" />
+                </StackLayout>
+                <StackLayout HorizontalOptions="CenterAndExpand" Padding="25">
+                    <Label Text="We do not collect or have access to the information that you provide here" FontSize="20" FontAttributes="Italic" FontFamily="Lobster-Regular" 
+                TextColor="Gray" />
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
             <StackLayout Padding="50">
                 <Entry Keyboard="Text"  x:Name="EntryUserName" Text="{Binding UserName, Mode=TwoWay}"
                     Placeholder="Username:" PlaceholderColor="Black"  />

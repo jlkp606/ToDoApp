@@ -81,7 +81,9 @@ namespace Todoapp.ViewModels
 			{
 
 				await App.Current.MainPage.DisplayAlert("Error", "Wrong User Name or Password!", "Yes");
-				await App.Current.MainPage.Navigation.PushModalAsync(new LoginPage());
+				UserName = "";
+				Password = "";
+
 			}
 		}
 		private async void GotoRegister()
