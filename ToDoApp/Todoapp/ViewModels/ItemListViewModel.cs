@@ -79,12 +79,10 @@ namespace Todoapp.ViewModels
 
 			AddItemCommand = new Command(OnAddItem);
 		}
-
 		private async void GoToPrivacy()
         {
 			await App.Current.MainPage.Navigation.PushModalAsync(new PrivacyPage());
 		}
-
 
 		public Item SelectedItem
 		{
@@ -92,7 +90,6 @@ namespace Todoapp.ViewModels
 			set
 			{
 				SetProperty(ref _selectedItem, value);
-				//OnItemSelected(value);
 			}
 		}
 
@@ -102,7 +99,6 @@ namespace Todoapp.ViewModels
 			set
 			{
 				SetProperty(ref status, value);
-				//OnItemSelected(value);
 			}
 		}
 
