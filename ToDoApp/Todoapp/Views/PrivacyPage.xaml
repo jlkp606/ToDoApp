@@ -4,19 +4,20 @@
              x:Class="Todoapp.Views.PrivacyPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Privacy Policy"
-                VerticalOptions="StartAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Label
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" >
-                <Label.Text>
-                   We do not store or have access to your
-any of your personal information 
-even of those that you have provided to us. 
+            <StackLayout Margin="20" Padding="20" Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Spacing="20">
+                <Label Text="Privacy Policy" FontSize="40" FontAttributes="None" FontFamily="Lobster-Regular" 
+                   TextColor="Blue" />
+                <StackLayout HorizontalOptions="CenterAndExpand">
+                    <Label FontSize="20" FontAttributes="Italic" FontFamily="Lobster-Regular" 
+                   TextColor="Blue" >
+                        <Label.Text>
+                        We do not store or have access to your any of your personal information even of those that you have provided to us.
+                            
 Please send your enquiries to enquiries@studybuddy.com
-                </Label.Text>
-            </Label>
+                    </Label.Text>
+                        </Label>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
